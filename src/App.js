@@ -1,23 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="flashcard-quiz-app">
+      <header className="header">
+        <div className="input-field">
+          <label htmlFor="category">Category</label>
+          <select id="category" name="category">
+            <option value="General">General Programming</option>
+            <option value="JavaScript">JavaScript</option>
+            <option value="ReactJS">React.js</option>
+          </select>
+        </div>
+        <div className="input-field">
+          <label htmlFor="amount">Number of quiz</label>
+          <select id="amount" name="amount">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </div>
+        <button>Generate</button>
       </header>
+      <main class="quiz-display">
+        <div className="card-container">
+          hello
+        </div>
+        <div className="card-container">
+          hello
+        </div>
+        <div className="card-container">
+          hello
+        </div>
+      </main>
     </div>
   );
 }
