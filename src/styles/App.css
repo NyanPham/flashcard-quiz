@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root {
+    --theme-color: hsl(201, 31%, 50%);
+    --hover-theme-color: hsl(200, 30%, 30%);
+}
+
+*, *::after, *::before {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: white;
+    font-family: 'Poppins', sans-serif;
+    padding-bottom: 50px;
+}
+
+.header {
+    width: 100%;
+    padding: 1rem;
+    background-color: white;
+    box-shadow: 3px 0 10px 2px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+}
+
+.select-dropdown-container{
+    position: relative;
+    width: max-content;
+}
+
+.select-dropdown-container:first-child {
+    width: 400px;
+}
+
+.select-label {
+    color: grey;
+}
+
+.selected-option {
+    position: relative;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    transition: border-color 250ms ease;
+}
+
+.selected-option::after {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border: 7px solid transparent;
+    border-top-color: black;
+    transform: translateY(30%);
+}
+
+
+.select-dropdown-container.visible .selected-option {
+    border-color:hsl(201, 31%, 50%);
+}
+
+.options-container {
+    position: absolute;
+    top: 105%;
+    left: 0;
+    width: 100%;
+    max-height: 250px;
+    background-color: white;
+    border: 1px solid rgba(255, 255, 255, .5);
+    box-shadow: 2px 2px 10px 2px rgba(0,0,0,0.2);
+    z-index: 5;
+    overflow-y: scroll;
+
+    transition: transform, opacity,  250ms ease-in-out;
+    transform: translateY(-30%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.select-dropdown-container.visible .options-container {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+}
+
+
+.select-option {
+    padding: .5rem 1rem;
+    pointer-events: all;
+    cursor: pointer;
+    pointer-events: none;
+    transition: background-color 250ms ease;
+}
+
+.select-dropdown-container.visible .select-option {
+    pointer-events: all;
+}
+
+.select-option:hover {
+    background-color: var(--theme-color);
+}
+
+.number-input-container {
+    width: max-content;
+}
+
+.number-input-container .input-title {
+    color: grey;
+}
+
+.number-input-container > input {
+    width: 150px;
+    padding: .5rem 1rem;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    outline: none;
+    font-size: 1.3rem;
+    transition: border-color 250ms ease;   
+
+}
+
+.number-input-container > input:focus {
+    border-color:hsl(201, 31%, 50%);    
+}
+
+.generate-button {
+    padding: .5rem 1rem;
+    font-size: 1.2rem;
+    border: none;
+    outline: none;
+    background-color: var(--theme-color);
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+
+    transition: background-color 250ms ease;
+}
+
+.generate-button:hover {
+    background-color: var(--hover-theme-color);
+}
+
+.quiz-display {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    align-items: center;
+}
+
+.card-container {
+    perspective: 1000px;
+    position: relative;
+    width: 90%;
+    min-height: 250px;
+    background-color: white;
+    margin-top: 35px;
+    cursor: pointer;
+}
+
+.card {
+    position: relative;
+    width: 100%;
+    min-height: 250px;
+    background-color: white;
+    box-shadow: 1px 2px 10px 3px rgba(0,0,0,0.3);
+    margin-top: 35px;
+    border-radius: .5rem;
+
+    transform-style: preserve-3d;
+    transition: transform 500ms ease;
+}
+
+.card-container.reveal .card {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    inset: 0;
+    padding: 1rem;
+    border-radius: .5rem;
+    backface-visibility: hidden;
+}
+
+.back-face {
+    transform: rotateY(180deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.question {
+    font-size: 1rem;
+    color:grey;
+}
+
+.answers {
+    margin-top: 1rem;
+}
+
+.answer {
+    margin-top: .5rem;
+    font-size: .9rem;
+}
+
+.correct-answer {
+    font-size: 1.3rem;
+}
