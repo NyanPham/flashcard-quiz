@@ -1,10 +1,10 @@
 export function processRawQuizzes(rawQuizzes) {
     const quizzes = rawQuizzes.map(quiz => {
       return {
-        question: quiz.question,
+        question: decodeHTMLEntities(quiz.question),
         answers: shuffleAnswers([...quiz.incorrect_answers.map(answer => {
           return {
-            text: answer,
+            text: decodeHTMLEntities(answer),
             correct: false
           }
         }), {text: quiz.correct_answer, correct: true}])
@@ -21,5 +21,11 @@ function shuffleAnswers(answers) {
         answers[randomIndex] = oldValue
     }
     return answers
+}
+
+function decodeHTMLEntities(string) {
+  return string.replace(/&#(\d+);/g, function(match, dec) {
+    return String.fromCharCode(dec)
+  })
 }
 

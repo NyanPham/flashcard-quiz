@@ -8,9 +8,7 @@ const Flashcard = (props) => {
         question,
         answers
     } = props
-
-    console.log(question, answers)
-
+    
     const correctAnswer = answers.find(answer => answer.correct)
 
     return (

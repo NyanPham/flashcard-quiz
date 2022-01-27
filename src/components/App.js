@@ -2,7 +2,7 @@ import '../styles/App.css';
 import CustomSelect from './CustomSelect'
 import CustomNumberInput from './CustomNumberInput';
 import Flashcard from './Flashcard'
-import { useState, useEffect } from 'react'
+import { useState, useMemo } from 'react'
 import useGetQuiz from '../api/useGetQuiz'
 import useGetCategories from '../api/useGetCategories'
 import { processRawQuizzes } from './helper'
@@ -15,13 +15,14 @@ function App() {
   const [loadCount, setLoadCount] = useState(0)
 
   const categories = useGetCategories()
-  const rawQuizzes = useGetQuiz(amount, selectedCategoryId, loadCount)
+  const rawQuizzes = useGetQuiz(selectedCategoryId, amount, loadCount)
 
   function handleGenerateClick() {
     setLoadCount(prevLoadCount => prevLoadCount + 1)
   }
-  const quizzes = processRawQuizzes(rawQuizzes)
-  console.log(quizzes)
+
+  const quizzes = useMemo(() => processRawQuizzes(rawQuizzes), [rawQuizzes])
+
   return (
     <div className="flashcard-quiz-app">
       <header className="header">
@@ -47,46 +48,7 @@ function App() {
               answers={quiz.answers}
             />
           )
-        })}
-        {/* <Flashcard 
-          question='Is Nyan handsome?'
-          answers={[
-            {
-              text: 'Yes, he is.',
-              correct: true
-            },
-            {
-              text: 'No, he isn\'t.',
-              correct: false
-            }
-          ]}
-        />
-        <Flashcard 
-          question='Is Nyan handsome?'
-          answers={[
-            {
-              text: 'Yes, he is.',
-              correct: true
-            },
-            {
-              text: 'No, he isn\'t.',
-              correct: false
-            }
-          ]}
-        />
-        <Flashcard 
-          question='Is Nyan handsome?'
-          answers={[
-            {
-              text: 'Yes, he is.',
-              correct: true
-            },
-            {
-              text: 'No, he isn\'t.',
-              correct: false
-            }
-          ]}
-        /> */}
+        })}    
       </main>
     </div>
   );

@@ -8,6 +8,7 @@ export default function useGetQuiz(categoryId, amount, loadCount) {
         .then(res => res.json())
         .then(data => {
             setQuizzes(data.results)
+            console.log(data.results)
         })
     } , [loadCount])
     
