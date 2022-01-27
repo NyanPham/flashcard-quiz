@@ -21,11 +21,19 @@ body {
     width: 100%;
     padding: 1rem;
     background-color: white;
-    box-shadow: 3px 0 10px 2px rgba(0,0,0,0.2);
+    box-shadow: 0 0 10px 2px rgba(0,0,0,0.3);
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    flex-wrap: wrap;
     gap: 1rem;
+}
+
+@media screen and (max-width: 650px) {
+    .header {
+        flex-direction: column;
+        justify-content: center;
+    }
 }
 
 .select-dropdown-container{
@@ -152,9 +160,11 @@ body {
 
 .quiz-display {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     justify-items: center;
     align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 1rem;
 }
 
 .card-container {
@@ -163,17 +173,13 @@ body {
     width: 90%;
     min-height: 250px;
     background-color: white;
-    margin-top: 35px;
     cursor: pointer;
 }
 
 .card {
     position: relative;
-    width: 100%;
-    min-height: 250px;
     background-color: white;
-    box-shadow: 1px 2px 10px 3px rgba(0,0,0,0.3);
-    margin-top: 35px;
+    box-shadow: 1px 2px 10px 2px rgba(0,0,0,0.3);
     border-radius: .5rem;
 
     transform-style: preserve-3d;
@@ -186,17 +192,18 @@ body {
 
 .card-face {
     position: absolute;
-    inset: 0;
-    padding: 1rem;
-    border-radius: .5rem;
     backface-visibility: hidden;
+    padding: 1rem;
+}
+
+.front-face {
+    left: 0;
 }
 
 .back-face {
-    transform: rotateY(180deg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    transform: rotateY(180deg) translate(-50%, -50%);
+    top: 50%;
+    right: 50%;
 }
 
 .question {

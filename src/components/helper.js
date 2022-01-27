@@ -24,8 +24,16 @@ function shuffleAnswers(answers) {
 }
 
 function decodeHTMLEntities(string) {
-  return string.replace(/&#(\d+);/g, function(match, dec) {
-    return String.fromCharCode(dec)
-  })
+  const textArea = document.createElement('textarea')
+  textArea.innerHTML = string
+  return textArea.value
 }
+
+// This regex-based approach is not comprehensive
+// EX: &quot; is not decoded
+// function decodeHTMLEntities(string) {
+//   return string.replace(/&#(\d+);/g, function(match, dec) {
+//     return String.fromCharCode(dec)
+//   })
+// }
 
