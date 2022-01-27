@@ -6,6 +6,7 @@ import { useState, useMemo } from 'react'
 import useGetQuiz from '../api/useGetQuiz'
 import useGetCategories from '../api/useGetCategories'
 import { processRawQuizzes } from './helper'
+import LoadingScreen from './LoadingScreen';
 
 
 function App() {
@@ -15,8 +16,7 @@ function App() {
   const [loadCount, setLoadCount] = useState(0)
 
   const categories = useGetCategories()
-  const rawQuizzes = useGetQuiz(selectedCategoryId, amount, loadCount)
-
+  const { rawQuizzes, loading } = useGetQuiz(selectedCategoryId, amount, loadCount)
   function handleGenerateClick() {
     setLoadCount(prevLoadCount => prevLoadCount + 1)
   }
@@ -40,7 +40,8 @@ function App() {
         <button className="generate-button" onClick={handleGenerateClick}>Generate</button>
       </header>
       <main className="quiz-display">
-        {quizzes.map((quiz, index) => {
+        {loading ? <LoadingScreen />: 
+        (quizzes.map((quiz, index) => {
           return (
             <Flashcard 
               key={index}
@@ -48,7 +49,7 @@ function App() {
               answers={quiz.answers}
             />
           )
-        })}    
+        }))}    
       </main>
     </div>
   );
